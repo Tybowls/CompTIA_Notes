@@ -1,0 +1,155 @@
+Analyze Indicators of Compromise and Malware
+____________________________________________
+1.1 Types of Malware
+Malware, short for malicious software, is software (or script or code) designed to disrupt computer operation, gather sensitive inoformation, or gain unauthorized accesss to computer systems without consent.
+
+Malware Characteristics:
+- Transparent (trying to stay as hidden as possible in order to not get caught)
+- Designed to exploit an OS or software vulnerability (we want systems well patch and strong defense to repel malware)
+- OS and device agnostic (no device or OS is more safe)
+- Activates programmatically
+- Responds to Commands
+- Often Evades scanning (goes back to Transparent) it tries to hide in the background
+_____________________________________________
+Malware Families 
+|--------------------------------------------------------------------------------------------|
+|Family|      | Variants|                                                                    |
+|-------------|------------------------------------------------------------------------------|
+|Virus        | Macro, boot sector, stealth, script                                          |
+|-------------|------------------------------------------------------------------------------|
+|Worm         | Bot/zombie, crypto, APT, generic                                             |
+|-------------|------------------------------------------------------------------------------|
+|Trojan       | Malicious code embedded in music, video, game, greeting cards, and utilities |
+|-------------|------------------------------------------------------------------------------|
+|Rootkit      | Firmware, Kernel, boot record, legitimate (anit-theft)                       |
+|-------------|------------------------------------------------------------------------------|
+|Spyware      | Adware, tracking cookies, geolocator, click fraud                            |
+|-------------|------------------------------------------------------------------------------|
+|Programmatic | logic bombs, backdoor                                                        |
+|-------------|------------------------------------------------------------------------------|
+|--------------------------------------------------------------------------------------------|
+
+Viruses -- What They Do --
+--------------------------
+Malicious code whose primary function is to replicate and deliver its payload.
+- Requires user intervention (e.g. Clicking a Link)
+- Requires a host to execute and replicate 
+--------------------------
+Boot Sector Virus - Infects the boot (first) sector of a drive, Loads into memory upon boot up.
+File Infector - Infects .com or .exe files by overwriting original code can easily infect other executables with the same extension
+Companion - Disguises itself as a legitimate program but uses a different extension with a higher priority (e.g. good.com to emulate good.exe)
+Macro Virus - written in a macro language and is platform-independent infects and replicates templates and documents
+--------------------------
+|File Types Targeted Include .bat, .com, .doc, .docx, .dll, .exe, .html, .mdb, .pdf, .vbs, .xls, .xlsx, .zip|
+--------------------------
+Viruses -- How They Act --
+--------------------------
+Stealth virus - Hides by encrypting its code. Masquerades as the original file and reports that the original file is intact
+Memory resident - Upon execution stays resident in memory, Can infect other programs running at the same time.
+Armored - Hides itself by obfuscation or by adding confusing or unnecesary code.
+Polymorphic - Produces varied but operational copies of itself
+Metamorphic - Capable of recompiling itself into a new form
+--------------------------
+WORMS
+-------------------------
+Malicious Code that exploits known vulnerabilities
+- Self replicating 
+- Takes advantage of network trasport features to spread (email attachments, instant messages, network connections)
+-------------------------
+Crypto variant/Ransomware - Encrypts files and demands ransom for the decryption key
+Command & Control (C&C) - Provides subsequent access for the attacker. Allows the attacker to maintain control of the infected device
+Advanced Persistent Threat - Sophisticated, Slow, and Stealthy why command and control capabilities.
+Bot/zombie - Automated processes that either have instructions embedded or listen.
+-------------------------
+TROJANS
+-------------------------
+Malicious code disguised as a legitimate application (e.g. malicious code is embedded in music, video, game, greeting card, "Fake" applications)
+- Spread through user interaction
+--------------------------
+RAT - Remote Access Trojan (RAT) objective is privileged remote administration (ablility to remote control that machine)
+Backdoor - Used to open a less obvious connection for later access
+Downloader - Used to download additional malicious code 
+Keylogger - Captures keystrokes and mouse/pad movements
+--------------------------
+ROOTKITS
+-------------------------
+Malicious code designed to allow a remote use "root" (admin) access 
+- Embedded in software or hardware
+- Very difficult to remove
+-------------------------
+Firmware - Embedded in device firmware
+Kernel - Embedded in OS (Operating System)
+Persistent - Enabled when the system starts up and stays active until the system is shut down
+Application - Runs in current system memory when a specific application is launched
+Library - Found in software applications that use code libraries (e.g DLLs). The rootkit replaces the original file with its own code
+-------------------------
+SPYWARE
+-------------------------
+Code that collects information without consent 
+- Can be used to manipulate configuration settings
+- Spreads through user interaction
+--------------------------
+Keylogger - Captures keystrokes and mouse/pad movements
+Monitors - Used for tracking user activities 
+Adware - Used for delivering targerted advertising based on user activity 
+Tracking Cookies - Used to log web browsing activity
+Click Fraud - Automated script that imitates a legitimate user by clicking ad for the purpose of generating pay per click revenue.
+---------------------------
+PROGRAMMATIC
+---------------------------
+Created / inserted by application programmers (coders) or publishers.
+---------------------------
+Backdoor - Code designed to bypass access controls
+Logic Bomb (slag code) - Code designed to execute when a certain event occurs and/or period of time.
+---------------------------
+Match the Meaning
+
+Malware - Malicious Code     
+Programmatic - Inserted by Developer/Publisher
+Polymorphic - Varied operational copies of itself
+Virus - Requires a host to execute and replicate
+Worm - Self contained program (e.g. bots, APTs)
+Trojan - Software the appears legitimate
+Rootkit - Has privileged acces to the system
+Spyware - Used for tracking user activities
+---------------------------
+Chapter 1.1 takeaways
+- Malware characteristics
+- Malware types and variants
+---------------------------
+1.2 Indicators of Compromise
+an Indicator of Compromise or (IOC) refers to specific artifacts (e.g. virus signature, IP Address, Malicious URL, Command and Control connections, and file changes) that with a high degree of confidence indicates an intrusion
+- Most malware will attempt to be covert and try to leave as few artifacts as possible
+- Conversely, extortion attacks such as Ransomware and Adware are attention grabbing
+---------------------------
+Malware Use Cases
+- Facilitate extortion schemes 
+- Weaponize computers and devices (bots/zombies)
+- Collect Authentication credentials (Passwords)
+- Exfiltrate data and intellectual properties (IP)
+- Distribute SPAM, pornography, and other illegal materials
+- Carry out information warfare or sabotage
+----------------------------
+Malware Modus Operandi
+- Exploit (Persistent by adding its executable path in the registry, autorun, etc.)
+- Masquerade (elevate itself to another process, so that it cannot be easily found)
+- Ploymorphism (deter the process of analysis by rapidly changing its code signature)
+- Callback (connections to command and control (C&C) servers)
+- Accomplish Task (for example, data exfiltration or zombie/bot)
+----------------------------
+How do we find Malware?
+Anti-Virus Software
+- Anitvirus software can be used to identify, contain, and in some cases eliminate known malicious code. 
+- AV software relies on virus definition files (known as DAT files) to identify malware. The definition files must be continually updated by the software publisher.
+- Best practices recommend using more than one type of AV in the enterprise
+Anti-Malware software identifies infections caused by a pantheon of malware including Viruses, Worms, Trojan horses, Rootkits, Spyware, Keyloggers, Ransomware, and Adware.
+----------------------------
+Malware Detection and Analysis Techniques
+----------------------------
+AV and Anti-Malware software | Signatures (AV), Known Characteristics, and Behaviors
+Post-Infection Scanner | Second generation AV (e.g. Malwarebytes)
+Log analysis | Use of a security even and incident management(SEIM) or equivalent
+Malware Intelligence | Knowledge of infection characteristics, C&C IP Addess, or distribution URLs
+Malware Verification | Analysis of suspicious files and URLs (e.g. VirusTotal)
+Reverse Engineering | Process of analyzing and understanding characteristics (*Behavioral Analysis) (*Code Analysis)
+----------------------------
